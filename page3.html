@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1 Year Celebration ❤️</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  /* SAME BACKGROUND */
+  background: url('bg.png') no-repeat center center/cover;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,192,203,0.25);
+  backdrop-filter: blur(3px);
+  z-index: 0;
+}
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+    .wrap {
+      width: min(92vw, 860px);
+      text-align: center;
+      z-index: 2;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.58);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.45);
+      border-radius: 28px;
+      padding: 30px 22px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.12);
+    }
+
+    .title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      color: #c53d74;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.8;
+      color: #7a3555;
+      margin-bottom: 18px;
+    }
+
+    .cake {
+      width: 250px;
+      height: 240px;
+      position: relative;
+      margin: 20px auto;
+      cursor: pointer;
+    }
+
+    .plate {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 230px;
+      height: 42px;
+      background: #d9b38c;
+      border-radius: 50px;
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08);
+    }
+
+    .layer {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 16px;
+    }
+
+    .layer1 { bottom: 42px; width: 180px; height: 36px; background: #ffb6c1; }
+    .layer2 { bottom: 78px; width: 200px; height: 36px; background: #ff8fb1; }
+    .layer3 { bottom: 114px; width: 220px; height: 36px; background: #f7c6ff; }
+
+    .candle {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 154px;
+      width: 10px;
+      height: 50px;
+      background: #fff;
+      border-radius: 5px;
+    }
+
+    .flame {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 18px;
+      background: radial-gradient(circle at 40% 30%, #fff7b1, #ffb400 55%, #ff5c00 100%);
+      border-radius: 50% 50% 50% 0;
+      animation: flicker 0.2s infinite alternate;
+      box-shadow: 0 0 18px rgba(255,170,0,0.8);
+    }
+
+    @keyframes flicker {
+      from { transform: translateX(-50%) scale(1) rotate(-2deg); }
+      to { transform: translateX(-50%) scale(1.12) rotate(2deg); }
+    }
+
+    .message {
+      font-size: clamp(1rem, 2.4vw, 1.25rem);
+      color: #4f2a3b;
+      line-height: 1.8;
+      margin-top: 8px;
+    }
+
+    .final {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: #c53d74;
+      margin-top: 8px;
+    }
+
+    .signature {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #d94c7d;
+      font-style: italic;
+    }
+
+    .btns {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: linear-gradient(135deg, #ff6f91, #ff4f86);
+      color: white;
+      font-size: 0.98rem;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(255,79,134,0.3);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.92);
+      color: #c53d74;
+    }
+
+    #musicBtn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: rgba(255,255,255,0.9);
+      color: #c53d74;
+      font-size: 0.94rem;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.14);
+    }
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0) scale(1); opacity: 1; }
+      to { transform: translateY(-120vh) scale(1.3); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 22px 16px; }
+      .cake { width: 220px; height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="musicBtn" onclick="toggleMusic()">🎵 Play Song</button>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="title">Our Celebration 🎉</div>
+      <div class="sub">One year of love, memories, smiles, and countless little moments that mean everything.</div>
+
+      <div class="cake" onclick="blowCandle()">
+        <div class="plate"></div>
+        <div class="layer layer3"></div>
+        <div class="layer layer2"></div>
+        <div class="layer layer1"></div>
+        <div class="candle"><div class="flame" id="flame"></div></div>
+      </div>
+
+      <div class="final">1 Year Stronger Together ❤️</div>
+      <div class="message">
+        Pragya, you make life sweeter, brighter, and more beautiful.<br>
+        Thank you for being my favorite person in the world.
+      </div>
+      <div class="signature">Forever yours, Shivansh 💕</div>
+
+      <div class="btns">
+        <button class="btn" onclick="burst()">Celebrate More 🎊</button>
+        <button class="btn secondary" onclick="nextPage()">Next Page ➜</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+
+    function toggleMusic() {
+      if (bgMusic.paused) {
+        bgMusic.play().then(() => musicBtn.textContent = '🔇 Pause Song').catch(() => {});
+      } else {
+        bgMusic.pause();
+        musicBtn.textContent = '🎵 Play Song';
+      }
+    }
+
+    function burst() {
+      confetti({ particleCount: 140, spread: 90, origin: { y: 0.65 } });
+    }
+
+    function blowCandle() {
+      document.getElementById('flame').style.display = 'none';
+      burst();
+    }
+
+    function nextPage() {
+      window.location.href = "page4.html";
+    }
+
+    function createHeart() {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = Math.random() > 0.5 ? '💖' : '💕';
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.bottom = '-30px';
+      h.style.fontSize = (16 + Math.random() * 18) + 'px';
+      h.style.animationDuration = (5 + Math.random() * 5) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 10000);
+    }
+
+    setInterval(createHeart, 700);
+  </script>
+</body>
+</html>
