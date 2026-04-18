@@ -13,6 +13,10 @@
       font-family: 'Poppins', sans-serif;
       background: url('bg.png') center center / cover no-repeat fixed;
       position: relative;
+
+      display: flex;              /* NEW */
+      align-items: center;        /* NEW */
+      justify-content: center;    /* NEW */
     }
 
     body::before {
@@ -25,10 +29,6 @@
 
     .wrap {
       width: min(92vw, 820px);
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       text-align: center;
       position: relative;
       z-index: 2;
